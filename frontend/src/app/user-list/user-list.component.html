@@ -1,0 +1,58 @@
+<div class="container">
+    <p>LIST OF USERS</p>
+
+    <!-- SEARCH BOX -->
+    <form [formGroup] ="search" (ngSubmit)="onSubmit()">
+        <select id="searchBy" name="searchBy" formControlName="searchBy" >
+            <option value="">Search By</option>
+            <option value="name" name="searchBy">Name</option>
+            <option value="email" name="searchBy">Email</option>
+            <option value="mobile" name="searchBy">Mobile</option>
+            <option value="address" name="searchBy">Address</option>
+            <option value="state" name="searchBy">State</option>
+            <option value="gender" name="searchBy">Gender</option>
+            <option value="message" name="searchBy">Message</option>
+        </select>
+        <input type="text" class ="form-control" placeholder="Search" formControlName="searchInput">
+    </form>
+
+
+    <table class="table">
+        <thead>
+            <tr class="table-heading">
+                <th style="width:10%">NAME</th>
+                <th style="width:17%">EMAIL</th>
+                <th style="width:08%">MOBILE</th>
+                <th style="width:12%">ADDRESS</th>
+                <th style="width:06%">STATE</th>
+                <th style="width:09%">GENDER</th>
+                <th style="width:20%">MESSAGE</th>
+                <th style="width:12%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-data" *ngFor="let user of users | async">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobile}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.state}}</td>
+                <td>{{user.gender}}</td>
+                <td id="message" class="mess">{{user.message}}</td>
+                <td>
+                    <button (click)="updateUser(user.id)" class="edit-btn">Edit</button>&nbsp;
+                    <button (click)="deleteUser(user.id)" class="del-btn">Delete</button>
+                    <!-- <button (click)="userDetails(user.id)">Details</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-num">
+        <ul class="pagination" >
+            <li><button (click)="reloadDataPrev()">Prev</button></li>
+            <li class="page-number">{{pageNo}}</li>
+            <li><button (click)="reloadDataNext()">Next</button></li>
+        </ul>
+    </div>
+</div>
